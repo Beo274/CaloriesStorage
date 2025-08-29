@@ -21,12 +21,4 @@ public class Food {
         this.fats = fats;
         this.carbohydrates = carbohydrates;
     }
-
-    @Override
-    public String toString() {
-        return name + "{Calories = " + this.calories + ", "
-                            + "proteins = " + this.proteins + ", "
-                            + "fats = " + this.fats + ", "
-                            + "carbohydrates = " + this.carbohydrates + "}";
-    }
 }

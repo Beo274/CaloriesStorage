@@ -14,10 +14,6 @@ public class Basket extends MealManager<Food> {
         this.basketName = basketName;
     }
 
-    public List<Food> getFood() {
-        return getMeal();
-    }
-
 //    public void whatsIn() {
 //        getFood().forEach(System.out::println);
 //    }

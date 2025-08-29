@@ -26,7 +26,8 @@ public class ControllerCPFC {
     @PostMapping("/add")
     public ResponseEntity addFood(@RequestBody Food food) {
         log.info("add food");
-        basket.getFood().add(food);
+        System.out.println(basket.getMeal());
+        basket.getMeal().add(food);
         return ResponseEntity.ok().build();
     }
 }
