@@ -14,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/food")
+@RequestMapping("/basket")
 public class ControllerCPFC {
     @Autowired
     private ServiceCPFC serviceCPFC;
@@ -25,14 +25,14 @@ public class ControllerCPFC {
         return BasketDTO.from(serviceCPFC.getBasket());
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add-food")
     public ResponseEntity addFood(@RequestBody Food food) {
         log.info("add food");
         serviceCPFC.addFood(food);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/del/{id}")
+    @PostMapping("/del-food/{id}")
     public ResponseEntity delFood(@PathVariable int id) {
         log.info("del food with id = {}", id);
         serviceCPFC.removeFood(id);
