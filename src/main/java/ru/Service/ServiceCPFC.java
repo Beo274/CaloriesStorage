@@ -1,10 +1,12 @@
 package ru.Service;
 
+import ru.Basket;
 import ru.nutrition.Entity.Food;
 
 import java.util.List;
 
 public interface ServiceCPFC {
-    List<Food> getFood();
+    Basket getBasket();
     void addFood(Food food);
+    void removeFood(int id);
 }

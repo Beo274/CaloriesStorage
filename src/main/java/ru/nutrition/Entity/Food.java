@@ -14,11 +14,16 @@ public class Food {
 
     private double carbohydrates;
 
-    public Food(String name, int calories, double proteins, double fats, double carbohydrates) {
+    private int mass;
+
+    public Food() {}
+
+    public Food(String name, int calories, double proteins, double fats, double carbohydrates, int mass) {
         this.name = name;
         this.calories = calories;
         this.proteins = proteins;
         this.fats = fats;
         this.carbohydrates = carbohydrates;
+        this.mass = mass;
     }
 }

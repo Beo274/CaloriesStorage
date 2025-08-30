@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.Basket;
 import ru.Service.ServiceCPFC;
+import ru.nutrition.DTO.BasketDTO;
 import ru.nutrition.Entity.Food;
+import ru.nutrition.Entity.Vegetable;
 
 import java.util.List;
 
@@ -15,19 +17,32 @@ import java.util.List;
 @RequestMapping("/food")
 public class ControllerCPFC {
     @Autowired
-    private Basket basket;
+    private ServiceCPFC serviceCPFC;
 
     @GetMapping
-    public Basket getBascket() {
+    public BasketDTO getBascket() {
         log.info("company get");
-        return basket;
+        return BasketDTO.from(serviceCPFC.getBasket());
     }
 
     @PostMapping("/add")
     public ResponseEntity addFood(@RequestBody Food food) {
         log.info("add food");
-        System.out.println(basket.getMeal());
-        basket.getMeal().add(food);
+        serviceCPFC.addFood(food);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/del/{id}")
+    public ResponseEntity delFood(@PathVariable int id) {
+        log.info("del food with id = {}", id);
+        serviceCPFC.removeFood(id);
+        return ResponseEntity.ok().build();
+    }
+
+//    @PostMapping("/veg")
+//    public ResponseEntity addVegFood(@RequestBody Vegetable food) {
+//        log.info("add vegetable");
+//        basket.getMeal().add(food);
+//        return ResponseEntity.ok().build();
+//    }
 }
