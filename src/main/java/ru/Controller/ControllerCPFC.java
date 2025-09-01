@@ -38,10 +38,10 @@ public class ControllerCPFC {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/{basket_id}/del-food/{food_id}")
-    public ResponseEntity delFood(@PathVariable int food_id, @PathVariable int basket_id) {
-        log.info("del food with basket_id = {} and food_id = {}", basket_id, food_id);
-        serviceCPFC.removeFood(food_id, basket_id);
-        return ResponseEntity.ok().build();
+    @PostMapping("/del-food")
+    public String delFood(@RequestParam(name = "name") String food_name) {
+        log.info("del food with name = {}", food_name);
+        serviceCPFC.removeFood(food_name);
+        return "Deleted food with name = " + food_name;
     }
 }

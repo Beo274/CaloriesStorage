@@ -44,7 +44,8 @@ public class ServiceCPFCImpl implements ServiceCPFC {
 
     @Override
     @Transactional
-    public void removeFood(int food_id, int basket_id) {
-        basket.getMeal().remove(food_id);
+    public void removeFood(String food_name) {
+        Food food = entityManager.createQuery("SELECT f FROM Food f WHERE name = :food_name", Food.class).setParameter("food_name", food_name).getSingleResult();
+        entityManager.remove(food);
     }
 }
