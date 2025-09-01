@@ -20,8 +20,4 @@ public class Basket extends MealManager<Food> {
 
     public Basket(@Qualifier("BasketName") String basketName) { this.basketName = basketName; }
 
-//    public void whatsIn() {
-//        getFood().forEach(System.out::println);
-//    }
-
 }

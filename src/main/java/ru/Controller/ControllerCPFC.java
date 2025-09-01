@@ -19,30 +19,29 @@ public class ControllerCPFC {
     @Autowired
     private ServiceCPFC serviceCPFC;
 
-    @GetMapping
-    public BasketDTO getBascket() {
-        log.info("company get");
-        return BasketDTO.from(serviceCPFC.getBasket());
+    @PostMapping
+    public int createBasket(@RequestBody BasketDTO basketDTO) {
+        log.info("create basket");
+        return serviceCPFC.createBasket(basketDTO.toBasket());
     }
 
-    @PostMapping("/add-food")
-    public ResponseEntity addFood(@RequestBody Food food) {
+    @GetMapping("/{id}")
+    public BasketDTO getBascket(@PathVariable int id) {
+        log.info("company get with id: {}", id);
+        return BasketDTO.from(serviceCPFC.getBasket(id));
+    }
+
+    @PostMapping("/{id}/add-food")
+    public ResponseEntity addFood(@RequestBody Food food, @PathVariable(name = "id") int basket_id) {
         log.info("add food");
-        serviceCPFC.addFood(food);
+        serviceCPFC.addFood(food, basket_id);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/del-food/{id}")
-    public ResponseEntity delFood(@PathVariable int id) {
-        log.info("del food with id = {}", id);
-        serviceCPFC.removeFood(id);
+    @PostMapping("/{basket_id}/del-food/{food_id}")
+    public ResponseEntity delFood(@PathVariable int food_id, @PathVariable int basket_id) {
+        log.info("del food with basket_id = {} and food_id = {}", basket_id, food_id);
+        serviceCPFC.removeFood(food_id, basket_id);
         return ResponseEntity.ok().build();
     }
-
-//    @PostMapping("/veg")
-//    public ResponseEntity addVegFood(@RequestBody Vegetable food) {
-//        log.info("add vegetable");
-//        basket.getMeal().add(food);
-//        return ResponseEntity.ok().build();
-//    }
 }

@@ -2,6 +2,7 @@ package ru.nutrition.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import ru.Basket;
 
 @Data
 @Entity
@@ -29,8 +30,9 @@ public class Food {
     @Column(name = "mass")
     private int mass;
 
-    @Column(name = "basket_id")
-    private int basketId;
+    @ManyToOne
+    @JoinColumn(name = "basket_id")
+    private Basket basket;
 
     public Food() {}
 

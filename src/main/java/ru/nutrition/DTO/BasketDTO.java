@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class BasketDTO {
     private String name;
     private List<FoodDTO> meal;
@@ -28,10 +26,13 @@ public class BasketDTO {
     }
 
     public Basket toBasket() {
+        // to Basket from DTO
         Basket basket = new Basket();
         basket.setBasketName(name);
         List<Food> meal = this.meal.stream()
-                .map(FoodDTO::toFood).toList();
+                .map(FoodDTO::toFood)
+                .collect(Collectors.toList());
+        basket.getMeal().addAll(meal);
         return basket;
     }
 }
