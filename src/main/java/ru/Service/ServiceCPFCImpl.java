@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.Basket;
+import ru.DAO.BasketDAO;
 import ru.Service.ServiceCPFC;
 import ru.nutrition.Entity.Food;
 
@@ -14,38 +15,29 @@ import java.util.List;
 @Service
 public class ServiceCPFCImpl implements ServiceCPFC {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Autowired
-    private Basket basket;
-    @Autowired
-    private Basket getBasket;
+    private BasketDAO basketDAO;
 
     @Override
     @Transactional
     public int createBasket(Basket basket) {
-        entityManager.persist(basket);
-        entityManager.flush();
-        return basket.getId();
+        return basketDAO.createBasket(basket);
     }
 
     @Override
     public Basket getBasket(int basket_id) {
-        return entityManager.find(Basket.class, basket_id);
+        return basketDAO.getBasket(basket_id);
     }
 
     @Override
     @Transactional
     public void addFood(Food food, int basket_id) {
-        food.setBasket(getBasket(basket_id));
-        entityManager.persist(food);
+        basketDAO.addFood(food, basket_id);
     }
 
     @Override
     @Transactional
     public void removeFood(String food_name) {
-        Food food = entityManager.createQuery("SELECT f FROM Food f WHERE name = :food_name", Food.class).setParameter("food_name", food_name).getSingleResult();
-        entityManager.remove(food);
+        basketDAO.removeFood(food_name);
     }
 }
