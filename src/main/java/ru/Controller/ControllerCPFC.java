@@ -27,7 +27,7 @@ public class ControllerCPFC {
 
     @GetMapping("/{id}")
     public BasketDTO getBascket(@PathVariable int id) {
-        log.info("company get with id: {}", id);
+        log.info("basket get with id: {}", id);
         return BasketDTO.from(serviceCPFC.getBasket(id));
     }
 

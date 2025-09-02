@@ -1,4 +1,4 @@
-package ru.DAO;
+package ru.nutrition.DAO;
 
 import ru.Basket;
 import ru.nutrition.Entity.Food;

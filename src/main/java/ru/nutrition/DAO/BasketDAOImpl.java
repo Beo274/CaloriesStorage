@@ -1,4 +1,4 @@
-package ru.DAO;
+package ru.nutrition.DAO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
